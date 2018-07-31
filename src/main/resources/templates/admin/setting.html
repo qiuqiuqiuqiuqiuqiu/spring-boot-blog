@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>修改网站配置</title>
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="/fragments/header :: header"/>
+<div class="container">
+
+    <div th:replace="/admin/fragments/options :: options"/>
+
+    <div th:replace="/fragments/pagination :: pagination(URLparameter='/admin/userList')"/>
+
+</div>
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

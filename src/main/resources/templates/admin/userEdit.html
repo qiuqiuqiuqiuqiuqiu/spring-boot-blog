@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>修改用户信息</title>
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="/fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="container">
+
+        <!--Show this info message only if posted successfully-->
+        <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
+
+        <!--New Post Form-->
+        <div class="row" style="margin-top:20px">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form autocomplete="off" action="#" th:action="@{/admin/user/userEditPost}"
+                      th:object="${user}" method="post" class="form-horizontal"
+                      role="form">
+
+                    <h2 class="text-center">修改用户信息</h2>
+
+                    <div class="form-group">
+                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                               class="alert alert-danger"></label>
+                        <input type="text" th:field="*{email}" placeholder="email"
+                               class="form-control input-lg" />
+                    </div>
+
+                    <div class="form-group">
+                        <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                               class="alert alert-danger"></label>
+                        <input type="text" th:field="*{username}" placeholder="username"
+                               class="form-control input-lg" />
+                    </div>
+                    <div class="form-group">
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                               class="alert alert-danger"></label>
+                        <input type="password" th:field="*{password}" placeholder="密码"
+                               class="form-control input-lg" />
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input  name="rolesList"  value="ROLE_USER" type="checkbox"   th:checked="${#lists.contains(rolesList,'ROLE_USER')}">用户</input>
+                                </label>
+                                <label>
+                                    <input name="rolesList"  value="ROLE_ADMIN" type="checkbox"   th:checked="${#lists.contains(rolesList,'ROLE_ADMIN')}">管理员</input>
+                                </label>
+                            </div>
+                            <ul class="dropdown-menu" role="menu">
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-block" value="Save"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+<script>
+    function setRole(role){
+        $("#role").val(role);
+    }
+</script>
+</html>

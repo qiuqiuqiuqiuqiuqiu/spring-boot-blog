@@ -1,0 +1,6 @@
+#FileLock
+#Mon Jul 30 18:21:02 CST 2018
+hostName=172.20.64.14
+id=164eab4927b6f6083babb364dd67d9f25cfab6b61e1
+method=file
+server=172.20.64.14\:14710

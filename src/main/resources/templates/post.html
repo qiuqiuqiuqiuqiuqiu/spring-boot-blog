@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:replace="/fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="/fragments/header :: header"/>
+
+<div class="container">
+
+    <!--Post-->
+    <div class="jumbotron">
+
+        <h1 th:text="${post.title}">Title</h1>
+        <div th:text="'创建时间: ' + ${#dates.format(post.createDate, 'yyyy-MM-dd')}">Created by</div>
+        <div>创建人：<a th:text="${post.user.username}" th:href="@{'/blog/' + ${post.user.username}}">User</a></div>
+        <h3 th:utext="${post.body}">Body</h3>
+
+        <!--Only show these buttons if the user is the owner of post-->
+        <div sec:authorize="isAuthenticated()" th:if="${username}">
+            <div class="row">
+                <a th:href="@{'/editPost/{id}'(id=${post.id})}" class="col-md-2">
+                    <button type="button" class="btn btn-primary btn-block" th:text="编辑">edit</button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <h2>评论:</h2>
+
+    <!--Comments-->
+    <div class="well" th:each="comment : ${post.comments}">
+        <h3 th:text="${comment.body}">Body</h3>
+        <div th:text="'评论时间: ' + ${#dates.format(comment.createDate, 'yyyy-MM-dd')} + ' by '">
+            Created by
+        </div>
+        <div>评论者：<a th:text="${comment.user.username}" th:href="@{'/blog/' + ${comment.user.username}}">User</a>
+        </div>
+    </div>
+
+    <!--Leave a comment button-->
+    <!--Only if authenticated-->
+    <div sec:authorize="isAuthenticated()">
+        <div class="row">
+            <a th:href="@{'/commentPost/{id}'(id=${post.id})}" class="col-md-2">
+                <button type="button" class="btn btn-primary btn-block" th:text="评论">Comment</button>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

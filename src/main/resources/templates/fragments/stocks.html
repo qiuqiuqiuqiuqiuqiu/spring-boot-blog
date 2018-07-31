@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<div th:fragment="stocks">
+
+    <table class="table table-hover">
+        <thead>
+        <tr><th>股票代码</th><th>操作类型</th><th>操作时间</th><th>价格</th><th>数量</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${pager.posts}">
+            <td th:text="${post.stockCode}">代码</td>
+            <td th:text="${post.operateType}">买入OR卖出</td>
+            <td th:text="${#dates.format(post.operateDate, 'yyyy-MM-dd HH:mm:ss')}">操作时间</td>
+            <td th:text="${post.stockPrice}">价格</td>
+            <td th:text="${post.stockCount}">数量</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+</html>

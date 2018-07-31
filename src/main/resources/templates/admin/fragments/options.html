@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="options">
+    <h1>网站配置</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr><th>ID</th><th>配置Key</th><th>配置值</th><th>描述</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${pager.posts}">
+            <td th:text="${post.id}">id</td>
+            <td th:text="${post.optionKey}">email</td>
+            <td th:text="${post.optionValue}">username</td>
+            <td th:text="${post.description}">username</td>
+            <td> <a th:href="@{'/admin/options/edit/' + ${post.id}}">修改</a></td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

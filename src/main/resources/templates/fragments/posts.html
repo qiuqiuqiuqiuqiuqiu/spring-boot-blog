@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<div th:fragment="posts">
+
+    <div class="starter-template panel" th:each="post : ${pager.posts}">
+        <div class="panel-heading">
+            <h1><a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">标题</a></h1>
+            <div th:text="'Created: ' + ${#dates.format(post.createDate, 'yyyy-MM-dd')} + ' by '">
+                Created by
+            </div>
+            <div>创建人：<a th:text="${post.user.username}" th:href="@{'/blog/' + ${post.user.username}}">User</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="users">
+    <h1>用户管理</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr><th>ID</th><th>邮箱</th><th>用户名</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${pager.posts}">
+            <td th:text="${post.id}">id</td>
+            <td th:text="${post.email}">email</td>
+            <td th:text="${post.username}">username</td>
+            <td> <a th:href="@{'/admin/user/edit/' + ${post.id}}">修改</a></td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
